@@ -123,13 +123,18 @@ alias la='ls -a'
 alias ll='ls -l'
 alias lla='ls -al'
 
-alias rm='rm -i'
+
+alias rm='rm -ir'
 alias cp='cp -i'
 alias mv='mv -i'
+
+
 
 alias e="emacs -nw"
 
 alias mkdir='mkdir -p'
+
+alias py='python'
 
 # sudo の後のコマンドでエイリアスを有効にする
 alias sudo='sudo '
@@ -137,6 +142,9 @@ alias sudo='sudo '
 # グローバルエイリアス
 alias -g L='| less'
 alias -g G='| grep'
+
+#cd後，自動的にls
+function chpwd(){ ls }
 
 # C で標準出力をクリップボードにコピーする
 # mollifier delta blog : http://mollifier.hatenablog.com/entry/20100317/p1
@@ -150,6 +158,9 @@ elif which putclip >/dev/null 2>&1 ; then
     # Cygwin
     alias -g C='| putclip'
 fi
+
+#pyenvの設定
+if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 
 ########################################
 #percolの設定
@@ -194,9 +205,8 @@ zle -N percol_insert_history
 
 # C-x ; でディレクトリに cd
 # C-x i でディレクトリを挿入
-bindkey '^h' percol_cd_history
+bindkey '^l' percol_cd_history
 bindkey '^xi' percol_insert_history
-
 
 
 ########################################
@@ -214,6 +224,9 @@ case ${OSTYPE} in
 esac
 
 export EDITOR=/usr/bin/emacs
-# vim:set ft=zsh:
 
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+if (which zprof > /dev/null 2>&1) ;then
+  zprof
+fi
+
